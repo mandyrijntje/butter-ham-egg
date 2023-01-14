@@ -1,0 +1,48 @@
+:root {
+    --textPrimary: rgb(255, 217, 0);
+    --backgroundPrimary: rgb(37, 0, 78);
+  }
+
+body {
+    background-color: var(--backgroundPrimary);
+    color: var(--textPrimary);
+}
+
+main {
+    width: 100%;
+    margin: 50px auto 0;
+
+}
+
+h1.header {
+    text-align: center;
+}
+
+div.game {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    border: 2px solid var(--textPrimary);
+    margin: 0 auto;
+    width: 50%;
+}
+
+div.game:after {
+    content: "";
+    display: block;
+    /* padding-bottom: 100%; */
+  }
+
+div.box {
+    width: 100%;
+    border: 2px solid var(--textPrimary);
+    box-sizing: border-box;
+}
+
+div.box:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+  }
+
+
