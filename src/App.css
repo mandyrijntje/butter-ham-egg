@@ -37,6 +37,12 @@ div.box {
     width: 100%;
     border: 2px solid var(--textPrimary);
     box-sizing: border-box;
+    font-size: 4rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+     align-items: center;
+
 }
 
 div.box:after {
@@ -45,4 +51,8 @@ div.box:after {
     padding-bottom: 100%;
   }
 
+
+span.symbol {
+    font-size: calc(6vw + 2vh);
+}
 
