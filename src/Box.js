@@ -1,6 +1,8 @@
-function Box() {
+function Box(props) {
     return(
-        <div className={'box'}></div>
+        <div className={'box'}{...props}>
+            { props.x ? 'x' : props.o ? 'o' : null}
+        </div>
     );
 }
 

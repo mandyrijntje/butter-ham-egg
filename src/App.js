@@ -14,7 +14,7 @@ function App() {
 
     var newBoxes = boxes; //make a new array of boxes to mark the 'clicked index' box with an X
 
-    newBoxes[index] = 'X'; //put an X in array, at the index of clicked box
+    newBoxes[index] = 'x'; //put an 'x' in array, at the index of clicked box
 
     setBoxes([...newBoxes]); //passing the new array as arg in the useState fn, so it can be reused
 
@@ -26,7 +26,11 @@ function App() {
       <Game>
         {boxes.map((box, index) => 
 
-        <Box onClick = {()=> handleBoxClick(index)} //passing the index of clicked box to fn, so it can do something with it. In this case, display x
+        <Box 
+        x = {box === 'x' ? 10: 0 }
+        o = {box === 'o' ? 10: 0 }
+
+        onClick = {()=> handleBoxClick(index)} //passing the index of clicked box to fn, so it can do something with it. In this case, display x
 
         />
         )
