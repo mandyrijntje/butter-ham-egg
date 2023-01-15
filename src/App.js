@@ -12,12 +12,17 @@ function App() {
 
   function handleBoxClick(index) {
 
+    const isUserTurn = 
+      boxes.filter((((box => box !== null).length) % 2) === 0);
+    
+    if (isUserTurn) {
+
     var newBoxes = boxes; //make a new array of boxes to mark the 'clicked index' box with an X
 
     newBoxes[index] = 'x'; //put an 'x' in array, at the index of clicked box
 
     setBoxes([...newBoxes]); //passing the new array as arg in the useState fn, so it can be reused
-
+    }
   }
 
   return (
