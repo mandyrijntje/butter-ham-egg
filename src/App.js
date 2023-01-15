@@ -18,25 +18,39 @@ function App() {
 
   const isUserTurn = boxes.filter(box => box !== null).length % 2 === 0; //check number of boxes marked with x or o, if that number%2 === 0. eg. if only user makes x, box number = 1, 1%2 !==0, so not user turn
 
+  function playXorO(index, symbol){
+    var newBoxes = boxes; //make a new array of boxes to mark the 'clicked index' box with an X or O
+
+    newBoxes[index] = symbol; //put an 'x' or 'o' in array, at the index of clicked box
+
+    setBoxes([...newBoxes]); //passing the new array as arg in the useState fn, so it can be reused
+  }
+
   function handleBoxClick(index) {
     
     if (isUserTurn) {
-
-    var newBoxes = boxes; //make a new array of boxes to mark the 'clicked index' box with an X
-
-    newBoxes[index] = 'x'; //put an 'x' in array, at the index of clicked box
-
-    setBoxes([...newBoxes]); //passing the new array as arg in the useState fn, so it can be reused
+      playXorO(index, "x"); // using play function to mark player choice with x
     }
   }
 
   useEffect (() => {
+
+    const computerPlaysTurn = index => {
+      playXorO(index, "o");// using play function to mark player choice with o, assigned to const to use later
+    }
+
     if(isUserTurn){
       return;
     }
     const emptyIndexes = boxes
     .map((box, index) => box === null ? index : null)
-    .filter(indexVal => indexVal !== null);
+    .filter(indexVal => indexVal !== null); //the indexes of all spots not yet taken by user or computer
+
+    const randomBoxChosenByComputer = 
+      emptyIndexes[Math.round(Math.random()*emptyIndexes.length)]; // choose a random index from the empty boxes, number can never be greater than length of empty index array
+
+      computerPlaysTurn(randomBoxChosenByComputer); //invoking const fn to mark field with 0
+
   }, [boxes]);
 
   return (
