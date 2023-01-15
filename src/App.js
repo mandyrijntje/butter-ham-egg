@@ -12,8 +12,7 @@ function App() {
 
   function handleBoxClick(index) {
 
-    const isUserTurn = 
-      boxes.filter((((box => box !== null).length) % 2) === 0);
+    const isUserTurn = boxes.filter(box => box !== null).length % 2 === 0;
     
     if (isUserTurn) {
 
