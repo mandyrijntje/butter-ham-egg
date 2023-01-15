@@ -2,7 +2,7 @@ import './App.css';
 import Box from './Box.js';
 import Game from './Game.js';
 import Header from './Header.js';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 
 const numberOfBoxes = () => (new Array(9)).fill(null);
 
@@ -10,9 +10,9 @@ function App() {
   
   const [boxes, setBoxes] = useState(numberOfBoxes);
 
-  function handleBoxClick(index) {
+  const isUserTurn = boxes.filter(box => box !== null).length % 2 === 0;
 
-    const isUserTurn = boxes.filter(box => box !== null).length % 2 === 0;
+  function handleBoxClick(index) {
     
     if (isUserTurn) {
 
@@ -23,6 +23,13 @@ function App() {
     setBoxes([...newBoxes]); //passing the new array as arg in the useState fn, so it can be reused
     }
   }
+
+  useEffect (() => {
+    if(isUserTurn){
+      return;
+    }
+    alert('WAIT FOR COMPUTER');
+  }, [boxes]);
 
   return (
     <main>
