@@ -6,11 +6,17 @@ import {useEffect, useState} from 'react';
 
 const numberOfBoxes = () => (new Array(9)).fill(null);
 
+const winningLines = [
+  [0,1,2],[3,4,5],[6,7,8],
+  [0,3,6],[1,4,7],[2,5,8],
+  [0,4,8],[2,4,6]
+]
+
 function App() {
   
   const [boxes, setBoxes] = useState(numberOfBoxes);
 
-  const isUserTurn = boxes.filter(box => box !== null).length % 2 === 0;
+  const isUserTurn = boxes.filter(box => box !== null).length % 2 === 0; //check number of boxes marked with x or o, if that number%2 === 0. eg. if only user makes x, box number = 1, 1%2 !==0, so not user turn
 
   function handleBoxClick(index) {
     
@@ -28,7 +34,9 @@ function App() {
     if(isUserTurn){
       return;
     }
-    alert('WAIT FOR COMPUTER');
+    const emptyIndexes = boxes
+    .map((box, index) => box === null ? index : null)
+    .filter(indexVal => indexVal !== null);
   }, [boxes]);
 
   return (
