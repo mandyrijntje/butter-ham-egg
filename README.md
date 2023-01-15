@@ -9,7 +9,7 @@ Listed in the repository.
 # Gameplay
 ```mermaid
 graph LR
-A((User plays X)) --> B((Computer plays O))-- User turn --> A[User plays X]--> C[User win?]-- Yes -->D{User wins}
+A((User plays X)) --> B((Computer plays O)) --> A --> C[User win?]-- Yes -->D{User wins}
 
 C -- No -->E[Computer win?]-- Yes -->F{Computer wins}
 
