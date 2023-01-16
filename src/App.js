@@ -45,31 +45,46 @@ function App() {
         });
     }
 
+    const emptyIndexes = boxes
+      .map((box, index) => box === null ? index : null)
+      .filter(indexVal => indexVal !== null); //the indexes of all spots not yet taken by user or computer
+
     const userWins = winningLine("x", "x", "x").length > 0;
     const computerWins = winningLine("o", "o", "o").length > 0;
 
     if (userWins) {
       alert("I WIN");
     }
-    if (userWins) {
+    if (computerWins) {
       alert("COMPUTER WINS");
     }
 
     const computerPlaysTurn = index => {
-      playXorO(index, "o");// using play function to mark player choice with o, assigned to const to use later
+      playXorO(index, "o"); // computer plays with o. Fn will be used with either winning or random index
     }
 
     if(isUserTurn){
       return;
     }
-    const emptyIndexes = boxes
-    .map((box, index) => box === null ? index : null)
-    .filter(indexVal => indexVal !== null); //the indexes of all spots not yet taken by user or computer
+    const computerWinningCombo
+      = winningLine("o", "o", "null"); // show all possible computer wins
+    
+    if (computerWinningCombo.length > 0) { //if there is a possible win for computer
 
-    const randomBoxChosenByComputer = 
-      emptyIndexes[Math.round(Math.random()*emptyIndexes.length)]; // choose a random index from the empty boxes, number can never be greater than length of empty index array
+      const computerWinIndex
+      = computerWinningCombo.filter(index => boxes[index] === null)[0]; //find per index where the box at that index is null, take the first result
 
-      computerPlaysTurn(randomBoxChosenByComputer); //invoking const fn to mark field with 0
+      computerPlaysTurn(computerWinIndex);
+      
+      return;
+    }
+
+    //if no possible win for computer
+
+    const randomBoxChosenByComputer 
+    = emptyIndexes[Math.round(Math.random()*emptyIndexes.length)]; // choose a random index from the empty boxes, number can never be greater than length of empty index array
+
+    computerPlaysTurn(randomBoxChosenByComputer); //invoking const fn to mark field with 0
 
   }, [boxes]);
 
