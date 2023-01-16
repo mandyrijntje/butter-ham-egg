@@ -46,9 +46,13 @@ function App() {
     }
 
     const userWins = winningLine("x", "x", "x").length > 0;
+    const computerWins = winningLine("o", "o", "o").length > 0;
 
     if (userWins) {
       alert("I WIN");
+    }
+    if (userWins) {
+      alert("COMPUTER WINS");
     }
 
     const computerPlaysTurn = index => {
