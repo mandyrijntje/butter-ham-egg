@@ -69,7 +69,22 @@ function App() {
     if(userTurnToPlay){
       return;
     }
+    //first computer tries to win
+
+    const computerWinningCombo
+    = winningLine('o', 'o', null); // show all possible computer wins
+  
+  if (computerWinningCombo.length > 0) { //if there is a possible win for computer
+
+    const computerWinIndex
+    = computerWinningCombo[0].filter(index => boxes[index] === null)[0]; //take first winning combo (what we want), and filter where the box at that index is null, take the first result. This is the index we need the computer to put o!
+
+    computerPlaysTurn(computerWinIndex);
     
+    return;
+  }
+    
+    //if no win, computer blocks
 
     const blockUserCombo
       = winningLine('x', 'x', null);
@@ -82,20 +97,8 @@ function App() {
       return;
     }
 
-    const computerWinningCombo
-      = winningLine('o', 'o', null); // show all possible computer wins
-    
-    if (computerWinningCombo.length > 0) { //if there is a possible win for computer
 
-      const computerWinIndex
-      = computerWinningCombo[0].filter(index => boxes[index] === null)[0]; //take first winning combo (what we want), and filter where the box at that index is null, take the first result. This is the index we need the computer to put o!
-
-      computerPlaysTurn(computerWinIndex);
-      
-      return;
-    }
-
-    //if no possible win for computer, try to put second O at a good position
+    //if no block, try to put second O at a good position
 
     const computerSecondInARow
       = winningLine('o', null, null);
