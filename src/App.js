@@ -95,7 +95,18 @@ function App() {
       return;
     }
 
-    //if no possible win for computer
+    //if no possible win for computer, try to put second O at a good position
+
+    const computerSecondInARow
+      = winningLine('o', null, null);
+
+    if (computerSecondInARow.length > 0) {
+      const secondMoveIndex = computerSecondInARow[0].filter(index => boxes[index] === null)[0];
+      computerPlaysTurn(secondMoveIndex);
+      return;
+    }
+
+    //if nothing, random position
 
     const randomBoxChosenByComputer 
     = emptyIndexes[Math.round(Math.random()*emptyIndexes.length)]; // choose a random index from the empty boxes, number can never be greater than length of empty index array
