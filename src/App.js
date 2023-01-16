@@ -6,7 +6,7 @@ import {useEffect, useState} from 'react';
 
 const numberOfBoxes = () => (new Array(9)).fill(null);
 
-const winningLines = [
+const validLines = [
   [0,1,2],[3,4,5],[6,7,8],
   [0,3,6],[1,4,7],[2,5,8],
   [0,4,8],[2,4,6]
@@ -34,6 +34,22 @@ function App() {
   }
 
   useEffect (() => {
+
+    const winningLine = (a, b, c) => {
+      return validLines
+        .filter(eachValidLine => {
+          const eachValidLineSymbols = eachValidLine.map(index => boxes[index]); //mapping each index of valid line, to show as the current symbol in that index position in the 'state box' array 
+          
+          return JSON.stringify([a,b,c].sort()) === JSON.stringify(eachValidLineSymbols.sort()); //check if sorted index strings match one symbol
+
+        });
+    }
+
+    const userWins = winningLine("x", "x", "x").length > 0;
+
+    if (userWins) {
+      alert("I WIN");
+    }
 
     const computerPlaysTurn = index => {
       playXorO(index, "o");// using play function to mark player choice with o, assigned to const to use later
