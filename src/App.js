@@ -69,6 +69,19 @@ function App() {
     if(userTurnToPlay){
       return;
     }
+    
+
+    const blockUserCombo
+      = winningLine('x', 'x', null);
+
+    if (blockUserCombo.length > 0) {
+      const computerBlockIndex = blockUserCombo[0].filter(index => boxes[index] === null)[0];
+
+      computerPlaysTurn(computerBlockIndex);
+      
+      return;
+    }
+
     const computerWinningCombo
       = winningLine('o', 'o', null); // show all possible computer wins
     
