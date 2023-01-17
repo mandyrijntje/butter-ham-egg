@@ -3,6 +3,8 @@ import Box from './Box.js';
 import Game from './Game.js';
 import Header from './Header.js';
 import Result from './Result.js';
+import Scoreboard from './ScoreBoard.js';
+
 import {useEffect, useState} from 'react';
 
 
@@ -14,7 +16,8 @@ function App() {
 
   const [boxes, setBoxes] = useState(numberOfBoxes());
   const [winner, setWinner] = useState(null); //no winner at start of game
-
+  const [userScore, setUserScore] = useState(0); 
+  const [computerScore, setComputerScore] = useState(0); 
 
   const validLines = [
     [0,1,2],[3,4,5],[6,7,8],
@@ -22,8 +25,27 @@ function App() {
     [0,4,8],[2,4,6]
   ];
 
+  const resetBoxes = () => {
+    var newBoxes = boxes;
+    newBoxes = (new Array(9)).fill(null);
+    setBoxes([...newBoxes]);
+    setWinner(null);
+  };
+
+
+
+
+  const userTurnToPlay = boxes.filter(box => box !== null).length % 2 === 0; //check number of boxes marked, if that number%2 === 0 is user turn, if 1 is computer
+
+
 
   const playAndMarkPlayedBoxes = (index, symbol) => {
+
+    if (userTurnToPlay && boxes[index] === 'o'){
+      alert('illegal move');
+      return;
+      }
+
     var newBoxes = boxes; //make a new array of boxes to mark the 'clicked index' box with an X or O
 
     newBoxes[index] = symbol; //put an 'x' or 'o' in array, at the index of clicked box
@@ -32,12 +54,24 @@ function App() {
   }
 
 
-  const userTurnToPlay = boxes.filter(box => box !== null).length % 2 === 0; //check number of boxes marked, if that number%2 === 0 is user turn, if 1 is computer
 
   function handleBoxClick(index) {
+
+    if(winner !== null){
+      return;
+    }
     
     if (userTurnToPlay) {
       playAndMarkPlayedBoxes(index, 'x'); // using play function to mark player choice with x
+    }
+
+    //check if tie
+
+    const gameCanContinue = boxes.filter(box => box === null);
+
+    if (gameCanContinue.length === 0){
+      setWinner('t');
+      return;
     }
   }
 
@@ -63,12 +97,28 @@ function App() {
   
     const computerWins = winningLine('o', 'o', 'o').length > 0;
 
+    if(winner !== null){
+      return;
+    }
+
 
     if (userWins) {
       setWinner('x');
+      setUserScore(userScore + 10);
+      return;
     }
+
     if (computerWins) {
       setWinner('o');
+      setComputerScore(computerScore + 10);
+      return;
+    }
+
+    const gameCanContinue = boxes.filter(index => boxes[index] == null);
+
+    if (gameCanContinue.length === 0){
+      setWinner('t');
+      return;
     }
 
     const computerPlaysTurn = index => {
@@ -130,6 +180,11 @@ function App() {
   return (
     <main>
       <Header />
+      <Scoreboard 
+        userscore = {userScore }
+        computerscore = {computerScore }
+      />
+      <button onClick={resetBoxes}>RESET GAME</button>
       <Game>
         {boxes.map((box, index) => 
 
@@ -146,6 +201,7 @@ function App() {
       {!!winner && winner !== null &&(
         <Result 
         win = {winner === 'x' ? 1: 0 }
+        tie = {winner === 't' ? 1: 0 }
         />
       )}
 
