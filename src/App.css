@@ -1,14 +1,29 @@
 :root {
     --textPrimary: rgb(250, 255, 150);
     --backgroundPrimary: rgb(30, 0, 60);
-    --defaultMargin: calc(1vh + 1vh) auto;
+    --backgroundSecondary: rgb(80, 80, 160);
+    --textSecondary: rgb(80, 80, 160);
+    --defaultMargin: calc(1vh + 1vh);
+    --centerMargin: calc(1vh + 1vh) auto;
     --defaultPadding: calc(1vh + 1vh);
+    --defaultFontSizeH1: calc(6vw + 2vh);
   }
 
 body {
     background-color: var(--backgroundPrimary);
     color: var(--textPrimary);
-    padding: var(--defaultPadding);
+    animation: fadeInAnimation ease 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+     }
 }
 
 main {
@@ -19,6 +34,9 @@ main {
 
 h1.header {
     text-align: center;
+    background-color: var(--backgroundSecondary);
+    font-size: var(--defaultFontSizeH1);
+    padding: var(--defaultPadding);
 }
 
 div.game {
@@ -26,7 +44,7 @@ div.game {
     grid-template-rows: 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr;
     border: 2px solid var(--textPrimary);
-    margin: var(--defaultMargin);
+    margin: var(--centerMargin);
     width: 50%;
 }
 

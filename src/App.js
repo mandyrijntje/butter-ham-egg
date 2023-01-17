@@ -85,6 +85,9 @@ function App() {
 
   useEffect (() => {
 
+    //computer wait after user plays
+    setTimeout(() => {
+
     const winningLine = (a, b, c) => {
       return validLines
         .filter(eachValidLine => {
@@ -181,7 +184,7 @@ function App() {
     = emptyIndexes[Math.round(Math.random()*emptyIndexes.length)]; // choose a random index from the empty boxes, number can never be greater than length of empty index array
 
     computerPlaysTurn(randomBoxChosenByComputer); //invoking const fn to mark field with 0
-
+    }, 500);
   }, [boxes]);
 
   return (
