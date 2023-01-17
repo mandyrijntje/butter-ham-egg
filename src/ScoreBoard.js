@@ -2,10 +2,10 @@ function Box(props) {
     return(
         <div className = {'scoreboard'}{...props}>
             <p className='userScoreText'>
-            {'user score: '} {props.userscore} 
+            {'KAAS: '} {props.userscore} 
             </p>
             <p className='computerScoreText'>
-            {'computer score: '} {props.computerscore} 
+            {'EI: '} {props.computerscore} 
             </p>
         </div>
     );
