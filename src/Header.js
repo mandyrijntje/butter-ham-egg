@@ -2,7 +2,7 @@ function Header() {
     return(
         <div>
         <h1 className="header">
-        Boter, Kaas en Eieren
+        Boter, kaas & eieren
         </h1>
         </div>
     )
