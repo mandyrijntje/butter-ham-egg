@@ -1,6 +1,6 @@
 function Box(props) {
     return(
-        <div className={'box'}{...props}>
+        <div className = {'box'}{...props}>
             <span className='symbol'>
                 { props.x ? 'X' : props.o ? 'O' : null}
             </span>

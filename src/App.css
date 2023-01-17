@@ -56,3 +56,7 @@ span.symbol {
     font-size: calc(6vw + 2vh);
 }
 
+p.results {
+    background-color: var(--textPrimary);
+    color: var(--backgroundPrimary);
+}

@@ -2,19 +2,25 @@ import './App.css';
 import Box from './Box.js';
 import Game from './Game.js';
 import Header from './Header.js';
+import Result from './Result.js';
 import {useEffect, useState} from 'react';
 
-const numberOfBoxes = () => (new Array(9)).fill(null);
 
-const validLines = [
-  [0,1,2],[3,4,5],[6,7,8],
-  [0,3,6],[1,4,7],[2,5,8],
-  [0,4,8],[2,4,6]
-];
 
 function App() {
-  
+
+  const numberOfBoxes = () => (new Array(9)).fill(null);
+
+
   const [boxes, setBoxes] = useState(numberOfBoxes());
+  const [winner, setWinner] = useState(null); //no winner at start of game
+
+
+  const validLines = [
+    [0,1,2],[3,4,5],[6,7,8],
+    [0,3,6],[1,4,7],[2,5,8],
+    [0,4,8],[2,4,6]
+  ];
 
 
   const playAndMarkPlayedBoxes = (index, symbol) => {
@@ -53,13 +59,16 @@ function App() {
       .filter(indexVal => indexVal !== null); //the indexes of all spots not yet taken by user or computer
 
     const userWins = winningLine('x', 'x', 'x').length > 0;
+
+  
     const computerWins = winningLine('o', 'o', 'o').length > 0;
 
+
     if (userWins) {
-      alert('I WIN');
+      setWinner('x');
     }
     if (computerWins) {
-      alert('COMPUTER WINS');
+      setWinner('o');
     }
 
     const computerPlaysTurn = index => {
@@ -125,8 +134,8 @@ function App() {
         {boxes.map((box, index) => 
 
         <Box 
-        x = {box === 'x' ? 10: 0 }
-        o = {box === 'o' ? 10: 0 }
+        x = {box === 'x' ? 1: 0 }
+        o = {box === 'o' ? 1: 0 }
 
         onClick = {()=> handleBoxClick(index)} //passing the index of clicked box to fn, so it can do something with it. In this case, display x
 
@@ -134,6 +143,12 @@ function App() {
         )
        }
       </Game>
+      {!!winner && winner !== null &&(
+        <Result 
+        win = {winner === 'x' ? 1: 0 }
+        />
+      )}
+
     </main>
   );
 }
