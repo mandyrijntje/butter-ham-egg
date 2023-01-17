@@ -45,6 +45,13 @@ function App() {
       alert('illegal move');
       return;
       }
+    if (userTurnToPlay && boxes[index] === 'x'){
+      alert('its my kaas');
+      return;
+    }
+      
+
+  
 
     var newBoxes = boxes; //make a new array of boxes to mark the 'clicked index' box with an X or O
 
