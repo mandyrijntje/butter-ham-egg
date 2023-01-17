@@ -2,7 +2,11 @@ function Result(props) {
     return(
         <div className = {'result'}{...props}>
             <span className = 'resultText'> 
-                { props.win ? 'YOU WON' : props.tie ? 'DRAW' : 'YOU LOST'}
+                { props.win ? 
+                        'Kaas is de winnaar! Wil je nog een keer spelen?' 
+                    : props.tie ? 
+                        'Kaas en ei hebben allebei gelijk(spel). Wil je nog een keer spelen?' 
+                    :   'Sorry, ei wint. Wil je nog een keer spelen?'}
             </span>
         </div>
     );

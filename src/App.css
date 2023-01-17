@@ -1,11 +1,14 @@
 :root {
     --textPrimary: rgb(250, 255, 150);
-    --backgroundPrimary: rgb(37, 0, 78);
+    --backgroundPrimary: rgb(30, 0, 60);
+    --defaultMargin: calc(1vh + 1vh) auto;
+    --defaultPadding: calc(1vh + 1vh);
   }
 
 body {
     background-color: var(--backgroundPrimary);
     color: var(--textPrimary);
+    padding: var(--defaultPadding);
 }
 
 main {
@@ -23,7 +26,7 @@ div.game {
     grid-template-rows: 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr;
     border: 2px solid var(--textPrimary);
-    margin: 0 auto;
+    margin: var(--defaultMargin);
     width: 50%;
 }
 
@@ -56,7 +59,11 @@ span.symbol {
     font-size: calc(6vw + 2vh);
 }
 
-p.results {
+div.result {
     background-color: var(--textPrimary);
     color: var(--backgroundPrimary);
+    margin: var(--defaultMargin);
+    padding: var(--defaultPadding);
+    text-align: center;
+    box-shadow: rgba(250, 255, 150, 0.4) 5px 5px, rgba(250, 255, 150, 0.2) 10px 10px, rgba(250, 255, 150, 0.05) 15px 15px;
 }
