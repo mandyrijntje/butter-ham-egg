@@ -12,7 +12,7 @@ function Box(props) {
                 </p>
             </div>
             <div className='col'>
-            <button onClick={props.buttonreset}>RESET GAME</button>
+            <button className = "btn btn-warning" onClick={props.buttonreset}>RESET GAME</button>
             </div>
         </div>
     );
