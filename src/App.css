@@ -13,7 +13,6 @@ body {
     background-color: var(--dark);
     color: var(--primary);
     animation: fadeInAnimation ease 1s;
-    animation-iteration-count: 1;
     animation-fill-mode: forwards;
 }
 
