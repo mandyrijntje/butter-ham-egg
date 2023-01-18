@@ -35,8 +35,7 @@ function App() {
 
 
 
-  const userTurnToPlay = boxes.filter(box => box !== null).length % 2 === 0; //check number of boxes marked, if that number%2 === 0 is user turn, if 1 is computer
-
+  const userTurnToPlay = boxes.filter(box => box !== null).length % 2 === 0; 
 
 
   const playAndMarkPlayedBoxes = (index, symbol) => {
@@ -60,7 +59,7 @@ function App() {
     setBoxes([...newBoxes]); //passing the new array as arg in the useState fn, so it can be reused
   }
 
-
+  const gameCannotContinue = (boxes.filter(box => box === null)).length === 0;
 
   function handleBoxClick(index) {
 
@@ -74,9 +73,7 @@ function App() {
 
     //check if tie
 
-    const gameCanContinue = boxes.filter(box => box === null);
-
-    if (gameCanContinue.length === 0){
+    if (gameCannotContinue){
       setWinner('t');
       return;
     }
@@ -124,9 +121,7 @@ function App() {
       return;
     }
 
-    const gameCanContinue = boxes.filter(index => boxes[index] == null);
-
-    if (gameCanContinue.length === 0){
+    if (gameCannotContinue){
       setWinner('t');
       return;
     }
@@ -193,8 +188,8 @@ function App() {
       <Scoreboard 
         userscore = {userScore }
         computerscore = {computerScore }
+        buttonreset = {resetBoxes}
       />
-      <button onClick={resetBoxes}>RESET GAME</button>
       <Game>
         {boxes.map((box, index) => 
 
@@ -202,7 +197,7 @@ function App() {
         x = {box === 'x' ? 1: 0 }
         o = {box === 'o' ? 1: 0 }
 
-        onClick = {()=> handleBoxClick(index)} //passing the index of clicked box to fn, so it can do something with it. In this case, display x
+        onClick = {()=> handleBoxClick(index)} 
 
         />
         )

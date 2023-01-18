@@ -11,6 +11,9 @@ function Box(props) {
                 {'⬮ '} {props.computerscore} 
                 </p>
             </div>
+            <div className='col'>
+            <button onClick={props.buttonreset}>RESET GAME</button>
+            </div>
         </div>
     );
 }
